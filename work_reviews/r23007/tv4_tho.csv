@@ -1,0 +1,2 @@
+image,type,verdict,note
+000000009448,missing_box,confirmed,"[Tho] Mở ảnh thấy rõ bé gái tóc vàng mặc áo khoác hồng cầm chiếc ô xanh lớn đứng chính giữa khung hình, có mask hồng panoptic lớp person nhưng bên detection chỉ có box umbrella mà thiếu hẳn box person"
