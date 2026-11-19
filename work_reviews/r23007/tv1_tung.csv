@@ -1,3 +1,3 @@
 image,type,verdict,note
-000000001818,missing_box,confirmed,[Tung] Có 2 con ngựa lấy con phía trên mà lại thiếu con phía dưới
-000000014007,category_swap,confirmed,"[Tung] DET ghi cat đúng, PAN ghi pizza sai"
+000000001818,missing_box,confirmed,[Tung] Có 2 con ngựa vằn (zebra) lấy con phía trên mà lại thiếu con phía dưới
+000000014007,category_swap,confirmed,"[Tung] Trong ảnh là con mèo, DET ghi cat đúng, PAN ghi pizza sai"
