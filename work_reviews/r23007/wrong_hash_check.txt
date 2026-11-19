@@ -1,0 +1,5 @@
+Nguoi kiem tra: Vo Tien Phat (TV2 - 2A202603130)
+Lo du lieu: r23007
+Ket qua kiem tra truc quan Tab 2 (review_app.py):
+- 000000007977.jpg: intact (429x640, 201.9 KB) - mo anh thay ro net canh nguoi truot van trong cong vien, anh nguyen ven khong vo/hong, chi sai ma sha256 trong manifest.json -> giu lai trong ban v2 va cap nhat lai hash.
+- 000000021839.jpg: intact (480x640, 213.9 KB) - mo anh thay ro net canh goc pho buoi toi co nguoi di bo, anh nguyen ven khong vo/hong, chi sai ma sha256 trong manifest.json -> giu lai trong ban v2 va cap nhat lai hash.

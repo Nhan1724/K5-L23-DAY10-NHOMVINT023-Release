@@ -1,0 +1,4 @@
+image,type,verdict,note
+000000005586,bbox_drift,rejected,"[Phát] ảnh thấy box DET tennis racket ôm sát toàn bộ mặt vợt và cán vợt trên tay vận động viên, khớp với mask PAN, không bị lệch tọa độ"
+000000005586,missing_box,confirmed,"[Phát] ảnh thấy người mặc áo cam đội mũ cam ngồi ở góc dưới bên phải rất rõ nét, đã có mask PAN person nhưng thiếu hoàn toàn box DET"
+000000014226,instance_merge,confirmed,[Phát] ảnh thấy có 2 chiếc ghế tách rời trên tàu (ghế người ngồi và ghế góc dưới trái) có 2 box DET riêng nhưng panoptic gộp chung thành 1 segment
