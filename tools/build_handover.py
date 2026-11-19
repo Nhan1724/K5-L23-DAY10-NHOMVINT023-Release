@@ -124,6 +124,7 @@ def build_handover(
     rules_path: Path | None,
     corrupt_hashes: set[str],
     skip_lineage: bool = False,
+    hash_checked_by: str = "",
 ) -> int:
     delivery = run_dir / "delivery"
     if not delivery.is_dir():
@@ -178,6 +179,16 @@ def build_handover(
             scene_leak_ids.append(target)
         elif etype in PANOPTIC_ONLY and target in manifest:
             panoptic_only_imgs.append((target, etype))
+
+    # Trung thực: README.txt chỉ được ghi "đã mở ảnh kiểm" khi có người thật đã kiểm.
+    intact_unchecked = sorted(set(wrong_hash_imgs) - corrupt_hashes)
+    if intact_unchecked and not hash_checked_by.strip():
+        raise SystemExit(
+            "Có ảnh wrong_hash chưa được người kiểm: " + ", ".join(intact_unchecked) + "\n"
+            "Mở Tab 2 của tools/review_app.py, nhìn từng ảnh, rồi chạy lại với:\n"
+            "  --hash-checked-by \"<Tên người đã mở ảnh>\"            (nếu ảnh nguyên vẹn)\n"
+            "  --corrupt-hash <tên_ảnh>                               (nếu ảnh hỏng thật -> vào rework)"
+        )
 
     rework_imgs = set(rework_map)
     # Also ensure missing files on disk cannot stay in v2
@@ -284,7 +295,10 @@ def build_handover(
     if wrong_hash_imgs:
         intact_wh = [i for i in sorted(set(wrong_hash_imgs)) if i not in corrupt_hashes]
         if intact_wh:
-            notes_parts.append(f"wrong_hash ({', '.join(intact_wh)}): đã mở ảnh kiểm nguyên vẹn nên giữ ở v2 và cập nhật sha256 mới trong manifest.csv")
+            notes_parts.append(
+                f"wrong_hash ({', '.join(intact_wh)}): {hash_checked_by.strip()} đã mở ảnh kiểm, ảnh nguyên vẹn "
+                "nên giữ ở v2 và ghi sha256 mới tính lại trong manifest.csv"
+            )
         if corrupt_hashes:
             notes_parts.append(f"wrong_hash hỏng ({', '.join(sorted(corrupt_hashes))}): đưa vào rework_queue.csv")
     if guideline_fix_imgs:
@@ -337,6 +351,7 @@ def main() -> int:
     ap.add_argument("--rules", help="Đường dẫn rules.json (mặc định tự tìm <run>/rules.json nếu có)")
     ap.add_argument("--corrupt-hash", default="", help="Danh sách tên ảnh wrong_hash bị hỏng thật, cách nhau bởi dấu phẩy")
     ap.add_argument("--skip-lineage", action="store_true", help="Không ghi runs/lineage.jsonl")
+    ap.add_argument("--hash-checked-by", default="", help="Tên người ĐÃ mở ảnh wrong_hash và thấy nguyên vẹn (bắt buộc nếu có wrong_hash)")
     args = ap.parse_args()
 
     run_dir = Path(args.run)
@@ -344,7 +359,7 @@ def main() -> int:
     if not rules_path.is_file():
         rules_path = None
     corrupt = {s.strip() for s in args.corrupt_hash.split(",") if s.strip()}
-    return build_handover(run_dir, rules_path, corrupt, skip_lineage=args.skip_lineage)
+    return build_handover(run_dir, rules_path, corrupt, skip_lineage=args.skip_lineage, hash_checked_by=args.hash_checked_by)
 
 
 if __name__ == "__main__":

@@ -29,7 +29,7 @@ def run_cmd(cmd: list[str]) -> None:
     subprocess.run(cmd, cwd=ROOT, check=True)
 
 
-def cmd_prepare(delivery: Path, members: int, launch_ui: bool) -> int:
+def cmd_prepare(delivery: Path, members: int, launch_ui: bool, lan: bool = False) -> int:
     if not delivery.is_dir() or not (delivery / "manifest.json").is_file():
         raise SystemExit(f"Không thấy thư mục đề ẩn hợp lệ tại: {delivery} (hãy giải nén de_an.zip vào gốc repo)")
 
@@ -71,19 +71,23 @@ def cmd_prepare(delivery: Path, members: int, launch_ui: bool) -> int:
     print("=" * 60)
 
     if launch_ui:
-        run_cmd([
+        ui_cmd = [
             sys.executable, str(ROOT / "tools" / "review_app.py"),
             "--delivery", str(delivery),
             "--candidates", str(cands_out),
             "--out", str(review_csv),
             "--rules", str(rules_out),
             "--members", str(members),
-        ])
+        ]
+        if lan:
+            ui_cmd += ["--host", "0.0.0.0"]
+        run_cmd(ui_cmd)
     else:
+        lan_flag = " --host 0.0.0.0" if lan else ""
         print(
             "\nBước tiếp theo — mở giao diện xem ảnh:\n"
             f"  python3 tools/review_app.py --delivery {delivery} --candidates {cands_out} "
-            f"--out {review_csv} --rules {rules_out} --members {members}"
+            f"--out {review_csv} --rules {rules_out} --members {members}{lan_flag}"
         )
     return 0
 
@@ -164,6 +168,7 @@ def main() -> int:
     p_prep.add_argument("--delivery", default="delivery")
     p_prep.add_argument("--members", type=int, default=5)
     p_prep.add_argument("--launch-ui", action="store_true")
+    p_prep.add_argument("--lan", action="store_true", help="Mở Web UI qua 0.0.0.0 để 5 máy cùng xem qua LAN")
 
     p_fin = sub.add_parser("finalize", help="Kiểm tra H3, gộp errors.json và xác nhận submission/de_an/")
     p_fin.add_argument("--delivery", default="delivery")
@@ -171,7 +176,7 @@ def main() -> int:
     args = ap.parse_args()
     delivery = ROOT / args.delivery if not Path(args.delivery).is_absolute() else Path(args.delivery)
     if args.cmd == "prepare":
-        return cmd_prepare(delivery, args.members, args.launch_ui)
+        return cmd_prepare(delivery, args.members, args.launch_ui, lan=args.lan)
     return cmd_finalize(delivery)
 
 

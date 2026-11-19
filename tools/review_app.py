@@ -16,6 +16,8 @@ import argparse
 import csv
 import io
 import json
+import re
+import socket
 import sys
 import threading
 import urllib.parse
@@ -314,6 +316,7 @@ HTML_PAGE = r"""<!DOCTYPE html>
   <div class="pill" id="statsPill">Đang tải...</div>
   <button class="btn-tab active" id="tab1Btn" onclick="switchTab(1)">1. Review Ứng viên</button>
   <button class="btn-tab" id="tab2Btn" onclick="switchTab(2)">2. Wrong Hash &amp; Ảnh Mặt Người</button>
+  <button class="btn-nav" onclick="syncState()">Đồng bộ nhóm</button>
   <button class="btn-nav" onclick="downloadShardCsv()">Tải CSV phần của mình</button>
 </header>
 
@@ -498,21 +501,27 @@ function renderCurrent() {
   checkNote();
 }
 
+function stripPrefix(note) {
+  return note.replace(/^\[[^\]]+\]\s*/, '').trim();
+}
+
 function checkNote() {
   const ci = SHARD_INDEX[CUR];
   const c = DATA.candidates[ci];
-  const val = buildFullNote(document.getElementById('noteInput').value.trim());
+  const raw = stripPrefix(document.getElementById('noteInput').value.trim());
+  const val = buildFullNote(raw);
   const status = document.getElementById('noteStatus');
-  const dup = DATA.reviews.some(r => r.image !== c.image && r.note === val);
-  const ok = val.length >= 20 && !dup && !val.includes('<<');
-  if (val.length < 20) {
-    status.textContent = `Còn thiếu ${20 - val.length} ký tự (${val.length}/20)`;
+  const sameSlot = r => r.image === c.image && c.possible_types.includes(r.type);
+  const dup = DATA.reviews.some(r => !sameSlot(r) && (r.note === val || stripPrefix(r.note) === raw));
+  const ok = raw.length >= 20 && !dup && !val.includes('<<') && !val.includes('[MÔ TẢ');
+  if (raw.length < 20) {
+    status.textContent = `Còn thiếu ${20 - raw.length} ký tự mô tả thực (chưa tính [Tên]: ${raw.length}/20)`;
     status.className = 'h3-bad';
   } else if (dup) {
-    status.textContent = `Trùng y hệt ghi chú của ảnh khác (vi phạm H3)! Hãy viết cụ thể hơn.`;
+    status.textContent = `Trùng y hệt ghi chú của ảnh/ứng viên khác (vi phạm H3)! Hãy viết cụ thể hơn.`;
     status.className = 'h3-bad';
   } else {
-    status.textContent = `Đạt chuẩn H3 (${val.length} ký tự, không trùng)`;
+    status.textContent = `Đạt chuẩn H3 (${raw.length} ký tự mô tả, không trùng)`;
     status.className = 'h3-ok';
   }
   ['b1','b2','b3'].forEach(id => {
@@ -523,9 +532,19 @@ function checkNote() {
 
 function buildFullNote(raw) {
   const revName = document.getElementById('reviewerName').value.trim();
-  if (!raw) return '';
-  if (revName && !raw.startsWith('[')) return `[${revName}] ${raw}`;
-  return raw;
+  const clean = stripPrefix(raw);
+  if (!clean) return '';
+  if (revName) return `[${revName}] ${clean}`;
+  return clean;
+}
+
+async function syncState() {
+  const res = await fetch('/api/state');
+  const fresh = await res.json();
+  DATA.reviews = fresh.reviews;
+  renderSidebar();
+  renderCurrent();
+  updateStats();
 }
 
 async function submitDecision(type, verdict) {
@@ -628,20 +647,28 @@ class ReviewState:
                 if (r.get("image") or "").strip()
             ]
 
+    @staticmethod
+    def strip_prefix(note: str) -> str:
+        return re.sub(r"^\[[^\]]+\]\s*", "", note.strip()).strip()
+
     def save_review(self, image: str, rtype: str, verdict: str, note: str) -> list[dict[str, str]]:
         if verdict not in ("confirmed", "rejected"):
             raise ValueError("verdict phải là confirmed hoặc rejected")
         if verdict == "confirmed" and rtype not in metrics.SEMANTIC_TYPES:
             raise ValueError(f"type '{rtype}' không hợp lệ cho confirmed")
-        if len(note) < 20:
-            raise ValueError("Ghi chú phải >= 20 ký tự")
+        raw_obs = self.strip_prefix(note)
+        if len(raw_obs) < 20:
+            raise ValueError("Mô tả thực trong ghi chú (chưa tính [Tên]) phải >= 20 ký tự")
 
         with self.lock:
             swap_pair = {"class_swap", "category_swap"}
-            self.reviews = [
-                r for r in self.reviews
-                if not (r["image"] == image and (r["type"] == rtype or (r["type"] in swap_pair and rtype in swap_pair)))
-            ]
+            def is_same_slot(r: dict[str, str]) -> bool:
+                return r["image"] == image and (r["type"] == rtype or (r["type"] in swap_pair and rtype in swap_pair))
+
+            if any(not is_same_slot(r) and (r["note"] == note or self.strip_prefix(r["note"]) == raw_obs) for r in self.reviews):
+                raise ValueError("Ghi chú trùng lặp với dòng khác (vi phạm H3)")
+
+            self.reviews = [r for r in self.reviews if not is_same_slot(r)]
             self.reviews.append({"image": image, "type": rtype, "verdict": verdict, "note": note})
             self.reviews.sort(key=lambda r: (r["image"], r["type"]))
             self.out_csv.parent.mkdir(parents=True, exist_ok=True)
@@ -735,6 +762,15 @@ def make_handler(state: ReviewState):
     return Handler
 
 
+def detect_lan_ip() -> str:
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.connect(("8.8.8.8", 80))
+            return s.getsockname()[0]
+    except OSError:
+        return "127.0.0.1"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Web UI xem ảnh đối chiếu cho nhóm 5 người")
     ap.add_argument("--delivery", required=True)
@@ -742,6 +778,7 @@ def main() -> int:
     ap.add_argument("--out", required=True, help="File review_log.csv để lưu kết quả")
     ap.add_argument("--rules", help="File rules.json (tuỳ chọn, để kiểm wrong_hash ở Tab 2)")
     ap.add_argument("--members", type=int, default=5)
+    ap.add_argument("--host", default="127.0.0.1", help="Mặc định 127.0.0.1; truyền 0.0.0.0 để 5 máy cùng vào qua LAN")
     ap.add_argument("--port", type=int, default=8765)
     ap.add_argument("--no-browser", action="store_true")
     args = ap.parse_args()
@@ -753,11 +790,14 @@ def main() -> int:
         Path(args.rules) if args.rules else None,
         args.members,
     )
-    server = ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(state))
-    url = f"http://127.0.0.1:{args.port}/"
-    print(f"Đang mở Trạm Review Ảnh tại {url} (Ctrl+C để dừng)...", flush=True)
+    server = ThreadingHTTPServer((args.host, args.port), make_handler(state))
+    local_url = f"http://127.0.0.1:{args.port}/"
+    print(f"Đang mở Trạm Review Ảnh tại {local_url} (Ctrl+C để dừng)...", flush=True)
+    if args.host == "0.0.0.0":
+        lan_ip = detect_lan_ip()
+        print(f"Link LAN cho các thành viên khác (cùng WiFi): http://{lan_ip}:{args.port}/", flush=True)
     if not args.no_browser:
-        threading.Timer(0.4, lambda: webbrowser.open(url)).start()
+        threading.Timer(0.4, lambda: webbrowser.open(local_url)).start()
     try:
         server.serve_forever()
     except KeyboardInterrupt:

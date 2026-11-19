@@ -345,17 +345,32 @@ class SyntheticSuiteTest(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            # 5. Build handover & assert check_handover passes 100% (exit code 0)
-            rc = build_handover.build_handover(run, run / "rules.json", set(), skip_lineage=False)
+            # 5. Build handover: phải chặn nếu có wrong_hash mà chưa có tên người mở ảnh kiểm
+            with self.assertRaises(SystemExit):
+                build_handover.build_handover(run, run / "rules.json", set(), skip_lineage=False)
+
+            rc = build_handover.build_handover(
+                run, run / "rules.json", set(), skip_lineage=False, hash_checked_by="Vo Tien Phat"
+            )
             self.assertEqual(rc, 0)
 
-            # 6. Smoke test review_app panel renderer & wrong_hash checker
+            # 6. Smoke test review_app panel renderer, wrong_hash checker & H3 raw-note guard
             manifest = json.loads((d / "manifest.json").read_text(encoding="utf-8"))["items"]
             wh = review_app.check_wrong_hash_images(d, manifest, run / "rules.json")
             self.assertEqual(wh[0]["status"], "intact")
             for mode in ("full", "crop_raw", "crop_overlay"):
                 png_bytes = review_app.render_candidate_panel(d, manifest, cands[0], mode)
                 self.assertTrue(png_bytes.startswith(b"\x89PNG"))
+
+            state = review_app.ReviewState(
+                d, run / "candidates.json", run / "review_ui_test.csv", run / "rules.json", members=5
+            )
+            with self.assertRaises(ValueError):
+                state.save_review("im_08", "class_swap", "confirmed", "[Nguyen Hoang Nhan] ok")
+            saved = state.save_review(
+                "im_08", "class_swap", "confirmed", "[Nguyen Hoang Nhan] mo anh thay xe tai thung kin mau do"
+            )
+            self.assertEqual(len(saved), 1)
 
 
 if __name__ == "__main__":
