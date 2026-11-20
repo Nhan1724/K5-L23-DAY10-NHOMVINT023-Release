@@ -1,0 +1,4 @@
+image,type,verdict,note
+img_0059,bbox_drift,rejected,"[Thọ] thấy bó hoa đỏ cắm trong bình gốm; box DET potted plant trùng khít 3 cạnh trái/phải/trên và ôm thêm phần bình, còn mask PAN chỉ lấy phần hoa do phần bình tách sang lớp vase — đây là lệch tự nhiên COCO"
+img_0193,class_swap,confirmed,"[Thọ] Mở ảnh thấy rõ cánh diều nhiều màu có đuôi dài đang bay trên bầu trời phía trên bé trai, nên PAN ghi kite đúng còn DET ghi bird là sai"
+img_0247,instance_merge,confirmed,"[Thọ] Mở ảnh thấy rõ 2 củ cà rốt riêng biệt xếp chồng lên nhau trên thớt (1 củ phía trên khung vàng, 1 củ dài phía trước khung xanh), bên DET tách đúng 2 box riêng nhưng panoptic gộp chung thành 1 segment hồng"
