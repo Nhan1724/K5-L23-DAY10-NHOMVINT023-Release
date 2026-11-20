@@ -1,0 +1,4 @@
+image,type,verdict,note
+img_0042,bbox_drift,confirmed,[Vinh] mở ảnh gốc thấy khung box bao trọn thân thuyền và cột buồm không bị lệch
+img_0182,bbox_drift,confirmed,[Vinh] mở ảnh gốc thấy đồng hồ thu phí đỗ xe đứng độc lập nhưng khung box detection bị kéo trượt thừa xuống dưới trụ quá nhiều
+img_0235,category_swap,confirmed,[Vinh] mở ảnh gốc thấy con mèo đen đang nằm cạnh người trên giường nên nhãn detection dog bị sai
