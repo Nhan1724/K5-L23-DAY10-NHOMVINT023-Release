@@ -1,0 +1,4 @@
+image,type,verdict,note
+img_0018,category_swap,confirmed,"[Phát] ảnh thấy người cởi trần mặc quần đùi đen đang ném đĩa bay màu đỏ trên bãi cỏ, nhãn DET person đúng còn mask PAN gán sai thành toilet"
+img_0093,bbox_drift,rejected,"[Phát] ảnh thấy box DET cow ôm sát đầu, tai và thân con bò đứng giữa khung hình, khớp với mask PAN, không bị lệch tọa độ mà do bò phía sau che nhẹ"
+img_0224,instance_merge,confirmed,"[Phát] ảnh thấy hai con ngựa tách rời trên đồng cỏ (một con lớn bên trái và một con nhỏ ở xa bên phải) có 2 box DET riêng nhưng panoptic gộp chung thành 1 segment"
