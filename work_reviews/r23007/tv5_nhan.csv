@@ -1,2 +1,2 @@
 image,type,verdict,note
-000000012667,bbox_drift,confirmed,"mở ảnh thấy quả chuối vàng cong dựa vào điện thoại bàn; khung cyan detection bị dịch xuống dưới, hụt phần đầu cong phía trên và thừa ra dưới đuôi quả so với mask panoptic"
+000000012667,bbox_drift,confirmed,"[Nhân] Mở ảnh thấy quả chuối vàng cong dựa vào điện thoại bàn; khung cyan detection bị dịch xuống dưới, hụt phần đầu cong phía trên và thừa ra dưới đuôi quả so với mask panoptic"
