@@ -1,0 +1,251 @@
+{
+  "summary": {
+    "total_candidates": 8,
+    "unique_images": 7,
+    "by_type": {
+      "bbox_drift": 2,
+      "class_swap_or_category_swap": 2,
+      "instance_merge": 1,
+      "missing_box": 3
+    }
+  },
+  "candidates": [
+    {
+      "image": "000000001818",
+      "suggested_type": "missing_box",
+      "possible_types": [
+        "missing_box"
+      ],
+      "reason": "Segment panoptic 'zebra' lớn (99.5% khung ảnh, 120106px) không có box detection",
+      "severity": 0.9945,
+      "det_class": null,
+      "pan_class": "zebra",
+      "det_bboxes": [],
+      "seg_id": 8092282,
+      "seg_bbox": [
+        0.0,
+        1.0,
+        638.0,
+        424.0
+      ],
+      "metrics": {
+        "seg_bbox_norm_area": 0.9945,
+        "seg_area_px": 120106
+      }
+    },
+    {
+      "image": "000000005586",
+      "suggested_type": "bbox_drift",
+      "possible_types": [
+        "bbox_drift"
+      ],
+      "reason": "Box 'tennis racket' lệch/chênh kích thước với segment (outside=0.00, IoU=0.85, center_dist=0.07)",
+      "severity": 0.154,
+      "det_class": "tennis racket",
+      "pan_class": "tennis racket",
+      "det_bboxes": [
+        [
+          131.2,
+          90.86004,
+          15.69984,
+          12.91992
+        ]
+      ],
+      "seg_id": 7436416,
+      "seg_bbox": [
+        131.0,
+        91.0,
+        14.0,
+        13.0
+      ],
+      "metrics": {
+        "outside_ratio": 0.0,
+        "iou": 0.846,
+        "center_dist": 0.068,
+        "occluder_share": 0.23
+      }
+    },
+    {
+      "image": "000000005586",
+      "suggested_type": "missing_box",
+      "possible_types": [
+        "missing_box"
+      ],
+      "reason": "Segment panoptic 'person' lớn (5.0% khung ảnh, 1785px) không có box detection",
+      "severity": 0.0505,
+      "det_class": null,
+      "pan_class": "person",
+      "det_bboxes": [],
+      "seg_id": 3381477,
+      "seg_bbox": [
+        132.0,
+        169.0,
+        68.0,
+        57.0
+      ],
+      "metrics": {
+        "seg_bbox_norm_area": 0.0505,
+        "seg_area_px": 1785
+      }
+    },
+    {
+      "image": "000000007991",
+      "suggested_type": "class_swap_or_category_swap",
+      "possible_types": [
+        "class_swap",
+        "category_swap"
+      ],
+      "reason": "Box detection 'spoon' trùng segment panoptic 'knife' (IoU=0.99, contain=1.00)",
+      "severity": 1.988,
+      "det_class": "spoon",
+      "pan_class": "knife",
+      "det_bboxes": [
+        [
+          0.8102400000000021,
+          157.31003049999998,
+          146.81984,
+          100.04001699999999
+        ]
+      ],
+      "seg_id": 2368294,
+      "seg_bbox": [
+        1.0,
+        157.0,
+        146.0,
+        100.0
+      ],
+      "metrics": {
+        "iou": 0.988,
+        "contain": 1.0,
+        "det_norm_area": 0.0639,
+        "seg_area_px": 2874
+      }
+    },
+    {
+      "image": "000000009448",
+      "suggested_type": "missing_box",
+      "possible_types": [
+        "missing_box"
+      ],
+      "reason": "Segment panoptic 'person' lớn (38.2% khung ảnh, 100507px) không có box detection",
+      "severity": 0.3825,
+      "det_class": null,
+      "pan_class": "person",
+      "det_bboxes": [],
+      "seg_id": 6372208,
+      "seg_bbox": [
+        128.0,
+        101.0,
+        254.0,
+        531.0
+      ],
+      "metrics": {
+        "seg_bbox_norm_area": 0.3825,
+        "seg_area_px": 100507
+      }
+    },
+    {
+      "image": "000000012667",
+      "suggested_type": "bbox_drift",
+      "possible_types": [
+        "bbox_drift"
+      ],
+      "reason": "Box 'banana' lệch/chênh kích thước với segment (outside=0.14, IoU=0.68, center_dist=0.17)",
+      "severity": 0.316,
+      "det_class": "banana",
+      "pan_class": "banana",
+      "det_bboxes": [
+        [
+          282.41984,
+          86.49191999999998,
+          169.59232,
+          249.86736000000002
+        ]
+      ],
+      "seg_id": 3371142,
+      "seg_bbox": [
+        284.0,
+        49.0,
+        163.0,
+        241.0
+      ],
+      "metrics": {
+        "outside_ratio": 0.139,
+        "iou": 0.684,
+        "center_dist": 0.168,
+        "occluder_share": 0.0
+      }
+    },
+    {
+      "image": "000000014007",
+      "suggested_type": "class_swap_or_category_swap",
+      "possible_types": [
+        "class_swap",
+        "category_swap"
+      ],
+      "reason": "Box detection 'cat' trùng segment panoptic 'pizza' (IoU=0.99, contain=1.00)",
+      "severity": 1.988,
+      "det_class": "cat",
+      "pan_class": "pizza",
+      "det_bboxes": [
+        [
+          340.25024,
+          153.380235,
+          76.62975999999999,
+          145.039794
+        ]
+      ],
+      "seg_id": 1778991,
+      "seg_bbox": [
+        340.0,
+        154.0,
+        77.0,
+        144.0
+      ],
+      "metrics": {
+        "iou": 0.988,
+        "contain": 1.0,
+        "det_norm_area": 0.0408,
+        "seg_area_px": 6371
+      }
+    },
+    {
+      "image": "000000014226",
+      "suggested_type": "instance_merge",
+      "possible_types": [
+        "instance_merge"
+      ],
+      "reason": "1 segment panoptic 'chair' phủ 5449px + 20014px trong 2 box detection tách biệt (pair_iou=0.00)",
+      "severity": 1.0,
+      "det_class": "chair",
+      "pan_class": "chair",
+      "det_bboxes": [
+        [
+          59.32991999999999,
+          399.85008,
+          167.18976,
+          72.26976
+        ],
+        [
+          394.79008,
+          16.93031999999998,
+          198.46976,
+          254.55984000000004
+        ]
+      ],
+      "seg_id": 8424846,
+      "seg_bbox": [
+        59.0,
+        17.0,
+        534.0,
+        455.0
+      ],
+      "metrics": {
+        "seg_area_px": 25463,
+        "box1_px": 5449,
+        "box2_px": 20014,
+        "pair_iou": 0.0
+      }
+    }
+  ]
+}

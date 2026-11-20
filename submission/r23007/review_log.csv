@@ -1,0 +1,9 @@
+image,type,verdict,note
+000000001818,missing_box,confirmed,[Tung] Có 2 con ngựa vằn (zebra) lấy con phía trên mà lại thiếu con phía dưới
+000000005586,bbox_drift,rejected,"[Phát] ảnh thấy box DET tennis racket ôm sát toàn bộ mặt vợt và cán vợt trên tay vận động viên, khớp với mask PAN, không bị lệch tọa độ"
+000000005586,missing_box,confirmed,"[Phát] ảnh thấy người mặc áo cam đội mũ cam ngồi ở góc dưới bên phải rất rõ nét, đã có mask PAN person nhưng thiếu hoàn toàn box DET"
+000000007991,category_swap,confirmed,[Vinh] mở ảnh gốc thấy cái thìa đầu tròn đặt trên mép đĩa thức ăn nên nhãn panoptic knife bị sai
+000000009448,missing_box,confirmed,"[Tho] Mở ảnh thấy rõ bé gái tóc vàng mặc áo khoác hồng cầm chiếc ô xanh lớn đứng chính giữa khung hình, có mask hồng panoptic lớp person nhưng bên detection chỉ có box umbrella mà thiếu hẳn box person"
+000000012667,bbox_drift,confirmed,"mở ảnh thấy quả chuối vàng cong dựa vào điện thoại bàn; khung cyan detection bị dịch xuống dưới, hụt phần đầu cong phía trên và thừa ra dưới đuôi quả so với mask panoptic"
+000000014007,category_swap,confirmed,"[Tung] Trong ảnh là con mèo, DET ghi cat đúng, PAN ghi pizza sai"
+000000014226,instance_merge,confirmed,[Phát] ảnh thấy có 2 chiếc ghế tách rời trên tàu (ghế người ngồi và ghế góc dưới trái) có 2 box DET riêng nhưng panoptic gộp chung thành 1 segment

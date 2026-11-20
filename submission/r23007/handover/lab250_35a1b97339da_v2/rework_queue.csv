@@ -1,0 +1,10 @@
+image,type,annotator,reviewer,action
+000000000285,bbox_out_of_bounds,A01,Q02,Cắt/chỉnh lại bbox vượt mép về đúng ranh giới vật
+000000001818,missing_box,A01,Q02,Gán bổ sung bbox detection cho vật bị bỏ sót
+000000002153,duplicate_box,A01,Q02,Xoá box detection bị lặp trùng và kiểm lại đối tượng
+000000004134,missing_image,A04,Q02,Bổ sung ảnh gốc bị thiếu và kiểm lại nhãn detection
+000000005586,missing_box,A01,Q03,Gán bổ sung bbox detection cho vật bị bỏ sót
+000000009448,missing_box,A04,Q01,Gán bổ sung bbox detection cho vật bị bỏ sót
+000000012667,bbox_drift,A03,Q02,Chỉnh lại toạ độ bbox detection khớp đúng biên vật
+000000014473,missing_image,A03,Q01,Bổ sung ảnh gốc bị thiếu và kiểm lại nhãn detection
+000000015597,bbox_out_of_bounds,A05,Q02,Cắt/chỉnh lại bbox vượt mép về đúng ranh giới vật
