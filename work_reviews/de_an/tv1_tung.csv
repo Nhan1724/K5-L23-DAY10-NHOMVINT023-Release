@@ -1,0 +1,4 @@
+image,type,verdict,note
+img_0003,class_swap,confirmed,[Tung] Trong ảnh là donut cắn dở và bị khuất mất một phần ở viền
+img_0091,bbox_drift,confirmed,"[Tung] Nhìn thấy xe rõ ràng mắt người không thấy nhiễu hay vấn đề gì, Box 'car' lệch rõ"
+img_0223,bbox_drift,rejected,[Tung] Trong ảnh có nhiều xúc xích che mất nhau nên box lệch có thể hiểu là do nhiễu

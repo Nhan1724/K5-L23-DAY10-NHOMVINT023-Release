@@ -1,0 +1,470 @@
+{
+  "summary": {
+    "total_candidates": 14,
+    "unique_images": 14,
+    "by_type": {
+      "bbox_drift": 6,
+      "class_swap_or_category_swap": 5,
+      "instance_merge": 2,
+      "missing_box": 1
+    }
+  },
+  "candidates": [
+    {
+      "image": "img_0003",
+      "suggested_type": "class_swap_or_category_swap",
+      "possible_types": [
+        "class_swap",
+        "category_swap"
+      ],
+      "reason": "Box detection 'cake' trùng segment panoptic 'donut' (IoU=1.00, contain=1.00)",
+      "severity": 1.998,
+      "det_class": "cake",
+      "pan_class": "donut",
+      "det_bboxes": [
+        [
+          180.38016,
+          0.9598960000000119,
+          458.65984,
+          343.519792
+        ]
+      ],
+      "seg_id": 8091175,
+      "seg_bbox": [
+        180.0,
+        1.0,
+        459.0,
+        343.0
+      ],
+      "metrics": {
+        "iou": 0.998,
+        "contain": 1.0,
+        "det_norm_area": 0.5765,
+        "seg_area_px": 124361
+      }
+    },
+    {
+      "image": "img_0018",
+      "suggested_type": "class_swap_or_category_swap",
+      "possible_types": [
+        "class_swap",
+        "category_swap"
+      ],
+      "reason": "Box detection 'person' trùng segment panoptic 'toilet' (IoU=1.00, contain=1.00)",
+      "severity": 1.996,
+      "det_class": "person",
+      "pan_class": "toilet",
+      "det_bboxes": [
+        [
+          139.19,
+          67.18008600000002,
+          185.67000000000002,
+          262.340064
+        ]
+      ],
+      "seg_id": 9613474,
+      "seg_bbox": [
+        139.0,
+        67.0,
+        186.0,
+        263.0
+      ],
+      "metrics": {
+        "iou": 0.996,
+        "contain": 1.0,
+        "det_norm_area": 0.2925,
+        "seg_area_px": 21216
+      }
+    },
+    {
+      "image": "img_0042",
+      "suggested_type": "bbox_drift",
+      "possible_types": [
+        "bbox_drift"
+      ],
+      "reason": "Box 'boat' lệch/chênh kích thước với segment (outside=0.00, IoU=0.86, center_dist=0.06)",
+      "severity": 0.142,
+      "det_class": "boat",
+      "pan_class": "boat",
+      "det_bboxes": [
+        [
+          432.52031999999997,
+          192.480084,
+          60.36991999999999,
+          148.96009600000002
+        ]
+      ],
+      "seg_id": 571201,
+      "seg_bbox": [
+        433.0,
+        212.0,
+        60.0,
+        129.0
+      ],
+      "metrics": {
+        "outside_ratio": 0.0,
+        "iou": 0.858,
+        "center_dist": 0.064,
+        "occluder_share": 0.023
+      }
+    },
+    {
+      "image": "img_0059",
+      "suggested_type": "bbox_drift",
+      "possible_types": [
+        "bbox_drift"
+      ],
+      "reason": "Box 'potted plant' lệch/chênh kích thước với segment (outside=0.00, IoU=0.69, center_dist=0.15)",
+      "severity": 0.307,
+      "det_class": "potted plant",
+      "pan_class": "potted plant",
+      "det_bboxes": [
+        [
+          23.89018499999999,
+          17.979999999999997,
+          244.93990200000002,
+          351.68
+        ]
+      ],
+      "seg_id": 11680332,
+      "seg_bbox": [
+        24.0,
+        18.0,
+        245.0,
+        244.0
+      ],
+      "metrics": {
+        "outside_ratio": 0.0,
+        "iou": 0.693,
+        "center_dist": 0.153,
+        "occluder_share": 0.217
+      }
+    },
+    {
+      "image": "img_0085",
+      "suggested_type": "class_swap_or_category_swap",
+      "possible_types": [
+        "class_swap",
+        "category_swap"
+      ],
+      "reason": "Box detection 'donut' trùng segment panoptic 'cake' (IoU=0.99, contain=1.00)",
+      "severity": 1.991,
+      "det_class": "donut",
+      "pan_class": "cake",
+      "det_bboxes": [
+        [
+          101.15967999999998,
+          112.849743,
+          119.37024,
+          90.32009400000001
+        ]
+      ],
+      "seg_id": 4453713,
+      "seg_bbox": [
+        101.0,
+        113.0,
+        120.0,
+        90.0
+      ],
+      "metrics": {
+        "iou": 0.991,
+        "contain": 1.0,
+        "det_norm_area": 0.0395,
+        "seg_area_px": 5507
+      }
+    },
+    {
+      "image": "img_0091",
+      "suggested_type": "bbox_drift",
+      "possible_types": [
+        "bbox_drift"
+      ],
+      "reason": "Box 'car' lệch/chênh kích thước với segment (outside=0.03, IoU=0.74, center_dist=0.12)",
+      "severity": 0.261,
+      "det_class": "car",
+      "pan_class": "car",
+      "det_bboxes": [
+        [
+          457.30143999999996,
+          96.767931,
+          182.69888000000003,
+          148.102578
+        ]
+      ],
+      "seg_id": 6449663,
+      "seg_bbox": [
+        471.0,
+        119.0,
+        169.0,
+        136.0
+      ],
+      "metrics": {
+        "outside_ratio": 0.03,
+        "iou": 0.739,
+        "center_dist": 0.116,
+        "occluder_share": 0.037
+      }
+    },
+    {
+      "image": "img_0093",
+      "suggested_type": "bbox_drift",
+      "possible_types": [
+        "bbox_drift"
+      ],
+      "reason": "Box 'cow' lệch/chênh kích thước với segment (outside=0.05, IoU=0.87, center_dist=0.06)",
+      "severity": 0.125,
+      "det_class": "cow",
+      "pan_class": "cow",
+      "det_bboxes": [
+        [
+          307.49024,
+          113.94115499999998,
+          332.51008,
+          295.09999799999997
+        ]
+      ],
+      "seg_id": 2661924,
+      "seg_bbox": [
+        304.0,
+        131.0,
+        333.0,
+        295.0
+      ],
+      "metrics": {
+        "outside_ratio": 0.048,
+        "iou": 0.875,
+        "center_dist": 0.058,
+        "occluder_share": 0.469
+      }
+    },
+    {
+      "image": "img_0182",
+      "suggested_type": "bbox_drift",
+      "possible_types": [
+        "bbox_drift"
+      ],
+      "reason": "Box 'parking meter' lệch/chênh kích thước với segment (outside=0.03, IoU=0.64, center_dist=0.15)",
+      "severity": 0.361,
+      "det_class": "parking meter",
+      "pan_class": "parking meter",
+      "det_bboxes": [
+        [
+          365.62208000000004,
+          238.24871999999996,
+          93.10144,
+          208.69104000000002
+        ]
+      ],
+      "seg_id": 10454065,
+      "seg_bbox": [
+        380.0,
+        228.0,
+        78.0,
+        176.0
+      ],
+      "metrics": {
+        "outside_ratio": 0.028,
+        "iou": 0.639,
+        "center_dist": 0.147,
+        "occluder_share": 0.002
+      }
+    },
+    {
+      "image": "img_0193",
+      "suggested_type": "class_swap_or_category_swap",
+      "possible_types": [
+        "class_swap",
+        "category_swap"
+      ],
+      "reason": "Box detection 'bird' trùng segment panoptic 'kite' (IoU=0.99, contain=1.00)",
+      "severity": 1.994,
+      "det_class": "bird",
+      "pan_class": "kite",
+      "det_bboxes": [
+        [
+          131.010125,
+          101.71,
+          27.98992,
+          49.279999999999994
+        ]
+      ],
+      "seg_id": 85938,
+      "seg_bbox": [
+        131.0,
+        102.0,
+        28.0,
+        49.0
+      ],
+      "metrics": {
+        "iou": 0.994,
+        "contain": 1.0,
+        "det_norm_area": 0.0082,
+        "seg_area_px": 246
+      }
+    },
+    {
+      "image": "img_0197",
+      "suggested_type": "missing_box",
+      "possible_types": [
+        "missing_box"
+      ],
+      "reason": "Segment panoptic 'dog' lớn (66.8% khung ảnh, 64386px) không có box detection",
+      "severity": 0.6681,
+      "det_class": null,
+      "pan_class": "dog",
+      "det_bboxes": [],
+      "seg_id": 7885187,
+      "seg_bbox": [
+        115.0,
+        18.0,
+        452.0,
+        403.0
+      ],
+      "metrics": {
+        "seg_bbox_norm_area": 0.6681,
+        "seg_area_px": 64386
+      }
+    },
+    {
+      "image": "img_0223",
+      "suggested_type": "bbox_drift",
+      "possible_types": [
+        "bbox_drift"
+      ],
+      "reason": "Box 'hot dog' lệch/chênh kích thước với segment (outside=0.00, IoU=0.83, center_dist=0.03)",
+      "severity": 0.175,
+      "det_class": "hot dog",
+      "pan_class": "hot dog",
+      "det_bboxes": [
+        [
+          151.57008000000002,
+          364.50975999999997,
+          55.17984,
+          9.58016
+        ]
+      ],
+      "seg_id": 15119927,
+      "seg_bbox": [
+        152.0,
+        365.0,
+        55.0,
+        8.0
+      ],
+      "metrics": {
+        "outside_ratio": 0.0,
+        "iou": 0.825,
+        "center_dist": 0.032,
+        "occluder_share": 0.319
+      }
+    },
+    {
+      "image": "img_0224",
+      "suggested_type": "instance_merge",
+      "possible_types": [
+        "instance_merge"
+      ],
+      "reason": "1 segment panoptic 'horse' phủ 28818px + 2051px trong 2 box detection tách biệt (pair_iou=0.00)",
+      "severity": 1.0,
+      "det_class": "horse",
+      "pan_class": "horse",
+      "det_bboxes": [
+        [
+          0.0,
+          168.519813,
+          128.73984000000002,
+          293.010102
+        ],
+        [
+          553.06016,
+          238.499877,
+          83.77024,
+          52.600086
+        ]
+      ],
+      "seg_id": 4998332,
+      "seg_bbox": [
+        0.0,
+        169.0,
+        637.0,
+        293.0
+      ],
+      "metrics": {
+        "seg_area_px": 30869,
+        "box1_px": 28818,
+        "box2_px": 2051,
+        "pair_iou": 0.0
+      }
+    },
+    {
+      "image": "img_0235",
+      "suggested_type": "class_swap_or_category_swap",
+      "possible_types": [
+        "class_swap",
+        "category_swap"
+      ],
+      "reason": "Box detection 'dog' trùng segment panoptic 'cat' (IoU=1.00, contain=1.00)",
+      "severity": 1.996,
+      "det_class": "dog",
+      "pan_class": "cat",
+      "det_bboxes": [
+        [
+          16.219999999999985,
+          222.79994000000002,
+          444.0,
+          147.20006
+        ]
+      ],
+      "seg_id": 1040193,
+      "seg_bbox": [
+        17.0,
+        223.0,
+        443.0,
+        147.0
+      ],
+      "metrics": {
+        "iou": 0.996,
+        "contain": 1.0,
+        "det_norm_area": 0.3533,
+        "seg_area_px": 39096
+      }
+    },
+    {
+      "image": "img_0247",
+      "suggested_type": "instance_merge",
+      "possible_types": [
+        "instance_merge"
+      ],
+      "reason": "1 segment panoptic 'carrot' phủ 5841px + 3074px trong 2 box detection tách biệt (pair_iou=0.15)",
+      "severity": 1.117,
+      "det_class": "carrot",
+      "pan_class": "carrot",
+      "det_bboxes": [
+        [
+          428.00032,
+          228.73991999999998,
+          58.96,
+          191.84016
+        ],
+        [
+          442.35008,
+          180.70992,
+          38.4,
+          99.38016
+        ]
+      ],
+      "seg_id": 12172114,
+      "seg_bbox": [
+        428.0,
+        181.0,
+        58.0,
+        239.0
+      ],
+      "metrics": {
+        "seg_area_px": 7038,
+        "box1_px": 5841,
+        "box2_px": 3074,
+        "pair_iou": 0.15
+      }
+    }
+  ]
+}

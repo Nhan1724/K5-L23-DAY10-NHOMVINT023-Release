@@ -1,6 +1,7 @@
 # Nhóm VINT023
 
 - Seed luyện tập: `23007`
+- Đề ẩn đã chọn: `de_an_07` (14 ứng viên chia đều 5 thành viên trong `work_reviews/de_an/`, kết quả chốt tại `submission/de_an/`)
 - Repo: `https://github.com/Nhan1724/K5-L23-DAY10-NHOMVINT023-Release`
 - Hướng dẫn từng bước (2 Đợt + Prompt an toàn cho Agent từng người): [tools/TASKS.md](../tools/TASKS.md)
 

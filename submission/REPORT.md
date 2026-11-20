@@ -1,7 +1,10 @@
+# Báo cáo nhóm VINT023
+
 ## 1. Số liệu luyện tập
 - F1 theo seed (rule / cross_check / overall):
   - `r23007` (sau review mắt đầy đủ 8 ứng viên / 7 ảnh, tổng 17 lỗi nộp): `F1 tổng ≈ 0.9 · lỗi luật ≈ 1.0 · lỗi gán nhãn ≈ 0.8`, `trace ≈ tier_a 1.0 · tier_b 1.0 · notify 1.0`
   - `r23017` (kiểm chứng validator): `rule ≈ 1.0` (11 lỗi luật), `trace ≈ tier_a 1.0 · tier_b 1.0 · notify 1.0`
+  - `de_an_07` (đề ẩn đã chọn): validator bắt **8 lỗi luật** và khoanh **14 ứng viên / 14 ảnh** (`bbox_drift: 6`, `class_swap_or_category_swap: 5`, `instance_merge: 2`, `missing_box: 1`); 5 thành viên đã review đủ 14/14 dòng (`11 confirmed`, `3 rejected`) tạo **19 lỗi** trong `submission/de_an/errors.json`, và truy vết `submission/de_an/trace.json` xác định `tier_a: 2 ảnh`, `tier_b: 9 ảnh`, `notify: 4 người` (`A03, A04, Q01, Q03`).
 - Số ứng viên trên lô sạch (`--no-faults`, `runs/clean`, 50 ảnh pool `calib`): **0 lỗi luật** và **0 ứng viên** sau khi lọc ownership Stage 1 cho `instance_merge`; hàng đợi trên seed luyện tập `r23007`: **8 ứng viên / 7 ảnh** (`bbox_drift: 2`, `class_swap_or_category_swap: 2`, `instance_merge: 1`, `missing_box: 3`); trên `r23017`: **13 ứng viên / 13 ảnh**.
 - Ngưỡng đã chọn và cách chọn (không dùng `_private`):
   - Đo trực tiếp phân bố tự nhiên trên 50 ảnh sạch `runs/clean` (`calib`): toàn bộ cặp khớp cùng lớp sạch có `outside_ratio <= 0.003`, `bbox_iou >= 0.908`, `center_dist <= 0.039`, `declared_area - actual_mask_px == 0`, và segment thing chưa ghép lớn nhất chỉ `299 px`.
